@@ -1,0 +1,331 @@
+{
+     "type" : 1
+    ,"target" : 3
+    ,"name" : "OpenFLProject2"
+    ,"main" : null
+    ,"projectPackage" : ""
+    ,"company" : ""
+    ,"license" : ""
+    ,"url" : ""
+    ,"targetData" : [
+
+    ]
+    ,"files" : [
+         {
+             "path" : "../../../Desktop/as3hx-master/output/out/Home.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/Main.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 92
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIInput.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 87
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UILabelX.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 34
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/Attributes.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 162
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UI.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 159
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 855
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIForm.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 818
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/MadSprite.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 42
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/MadMasking.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 54
+        }
+        ,{
+             "path" : "Source/BaseTest.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 22
+        }
+        ,{
+             "path" : "Source/SuperTest.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 21
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIScrollVertical.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 98
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIPicker.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 412
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIBackButton.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 86
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UITabButton.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 147
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIButton.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 293
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIImage.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 151
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIActivity.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 55
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UISearch.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 133
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UITabPagesTop.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIPages.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 588
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollTouchGrids.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 738
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollDataGrids.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 110
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UISpecialDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 79
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UICell.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UIe.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 77
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIDividedList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 66
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UITickList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 151
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UIListHorizontal.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 130
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UILongList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 133
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UISwitch.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 9
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/Model.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 549
+        }
+        ,{
+             "path" : "project.xml"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 12
+        }
+    ]
+    ,"activeFile" : "project.xml"
+    ,"openFLTarget" : "android"
+    ,"openFLBuildMode" : "Debug"
+    ,"runActionType" : 2
+    ,"runActionText" : "haxelib run lime run \"%path%\" android"
+    ,"buildActionCommand" : "haxelib run lime build \"%path%\" android -debug"
+    ,"hiddenItems" : [
+
+    ]
+    ,"showHiddenItems" : false
+}

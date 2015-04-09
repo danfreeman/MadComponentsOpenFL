@@ -1,0 +1,169 @@
+{
+     "type" : 1
+    ,"target" : 3
+    ,"name" : "OpenFLProject2"
+    ,"main" : null
+    ,"projectPackage" : ""
+    ,"company" : ""
+    ,"license" : ""
+    ,"url" : ""
+    ,"targetData" : [
+
+    ]
+    ,"files" : [
+         {
+             "path" : "Source/com/danielfreeman/madcomponents/UILabelX.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 43
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 767
+        }
+        ,{
+             "path" : "Export/html5/haxe/ApplicationMain.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIButton.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 324
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIForm.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 719
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIBackButton.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 179
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIDividedList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 67
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UISwitchX.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 213
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UICheckBox.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 144
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UIRadioButton.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 94
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UICutCopyPaste.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 198
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UISimpleDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 471
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UITabPages.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 335
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIBlueText.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 141
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UINavigationBar.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 261
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UILabel.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 41
+        }
+    ]
+    ,"activeFile" : "Source/com/danielfreeman/madcomponents/UIBlueText.hx"
+    ,"openFLTarget" : "mac"
+    ,"openFLBuildMode" : "Debug"
+    ,"runActionType" : 2
+    ,"runActionText" : "haxelib run lime run \"%path%\" mac"
+    ,"buildActionCommand"" : "haxelib run lime build \"%path%\" mac -debug"
+    ,"hiddenItems" : [
+
+    ]
+    ,"showHiddenItems" : false
+}
