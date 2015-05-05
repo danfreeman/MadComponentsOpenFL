@@ -121,7 +121,7 @@ class UIPicker extends UIList
         return PICKER_DECAY;
     }
     
-    /**
+/**
  *  Draw picker chrome
  */
     private function drawSpinner() : Void{
@@ -174,7 +174,7 @@ class UIPicker extends UIList
 		_spinner.graphics.endFill();
     }
     
-    /**
+/**
  *  Basic picker shape
  */
     public function drawShape(graphics : Graphics, x : Float = 0, y : Float = 0, partial : Int = 0) : Void{
@@ -229,7 +229,7 @@ class UIPicker extends UIList
     }
     
     
-    /**
+/**
  *  If false, scrolling is locked.
  */
     override private function set_scrollEnabled(value : Bool) : Bool{
@@ -261,7 +261,7 @@ class UIPicker extends UIList
         return _pickerHeight;
     }
     
-    /**
+/**
  *  Rearrange the layout to new screen dimensions
  */
     override public function layout(attributes : Attributes) : Void{
@@ -298,7 +298,7 @@ class UIPicker extends UIList
     }
     
     
-    /**
+/**
  *  Data object for last row clicked
  */
     override private function get_row() : Dynamic{
@@ -396,7 +396,7 @@ class UIPicker extends UIList
         dispatchEvent(new Event(Event.CHANGE));
     }
     
-    /**
+/**
  *  Draw picker background
  */
     override public function drawComponent() : Void{
@@ -411,7 +411,7 @@ class UIPicker extends UIList
     	graphics.endFill();
 	}
     
-    /**
+/**
  *  Set array of objects data
  */
     override private function set_data(value : Array<Dynamic>) : Array<Dynamic> {

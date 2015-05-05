@@ -129,7 +129,7 @@ class UIScrollTouchGrids extends UIScrollDataGrids
     private static inline var LONG_ROW_THRESHOLD : Int = 64;
     
     private var _clickDelay : Timer = new Timer(150, 1);
-    private var _slideTimer : Timer = new Timer(50, UIScrollDataGrid.STEPS);
+    private var _slideTimer : AnimationTimer;// = new Timer(20, UIScrollDataGrid.STEPS);
     private var _rowSelectColour : Int = ROW_SELECT_COLOUR;
     private var _highlightedRowIndex : Int = -1;
     private var _highlightedDataGrid : UISimpleDataGrid = null;
@@ -167,6 +167,8 @@ class UIScrollTouchGrids extends UIScrollDataGrids
         _temporaryRowHighlight.blendMode = BlendMode.MULTIPLY;  //DARKEN;  
         _editButtonLayer = new Sprite();
         super(screen, xml, attributes);
+		_slideTimer = new AnimationTimer(this, UIScrollDataGrid.STEPS);
+
 		addChild(_temporaryRowHighlight);
         addChild(_editButtonLayer);
         setChildIndex(_temporaryRowHighlight, getChildIndex(_titleSlider) - 1);
@@ -343,7 +345,7 @@ class UIScrollTouchGrids extends UIScrollDataGrids
         }
         var fromX : Float = (_slideTimer.running) ? _editButton.x : _attributes.width;
         var toX : Float = _attributes.width - _editButton.width;
-        _deltaEditButtonX = ((direction) ? 1.0 : -1.0) * (toX - fromX) / UIScrollDataGrid.STEPS;
+        _deltaEditButtonX = (direction ? 1.0 : -1.0) * (toX - fromX) / UIScrollDataGrid.STEPS;
         _slideTimer.stop();
         _slideTimer.reset();
         _slideTimer.start();
@@ -379,7 +381,7 @@ class UIScrollTouchGrids extends UIScrollDataGrids
         while (index + 1 < _dataGrids.length && _dataGrids[index + 1].includeInLayout && y > _dataGrids[index + 1].y){
             index++;
         }
-        return index >= (0) ? _dataGrids[index] : null;
+        return (index >= 0) ? _dataGrids[index] : null;
     }
     
     
@@ -409,6 +411,7 @@ class UIScrollTouchGrids extends UIScrollDataGrids
     
     
     override private function set_sliderY(value : Float) : Float{
+		value = toPixelBoundaryDouble(this, 0, value).y;
         super.sliderY = value;
         _editButtonLayer.y = _temporaryRowHighlight.y = value;
         return value;
@@ -516,7 +519,8 @@ class UIScrollTouchGrids extends UIScrollDataGrids
                     abortClick();
                 }
             }
-            if (cast((event.currentTarget), Timer).currentCount == LONG_ROW_THRESHOLD && _mouseDistance < 2 * UIScrollVertical.THRESHOLD) {
+//            if (cast((event.currentTarget), Timer).currentCount == LONG_ROW_THRESHOLD && _mouseDistance < 2 * UIScrollVertical.THRESHOLD) {
+            if (_touchTimer.currentCount == LONG_ROW_THRESHOLD && _mouseDistance < 2 * UIScrollVertical.THRESHOLD) {
                 dispatchEvent(new Event(LONG_ROW_SELECTED));
             }
         }

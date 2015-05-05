@@ -46,11 +46,12 @@ class MadSprite extends Sprite implements IComponentUI
     private var _clickable : Bool = true;
     private var _includeInLayout : Bool = true;
     private var _attributes : Attributes = null;
-    
+	
+	
     
     public function new(screen : Sprite, attributes : Attributes = null)
     {
-        super();
+		super();
         if (screen != null) {
             screen.addChild(this);
         }
@@ -129,6 +130,9 @@ class MadSprite extends Sprite implements IComponentUI
 		var globalPoint:Point = target.localToGlobal(new Point(x, y));
 		return target.globalToLocal(new Point(Math.round(globalPoint.x / UI.scale) * UI.scale, Math.round(globalPoint.y / (2 * UI.scale)) * 2 * UI.scale));
 	}
+	
+	
+	
 	
     
     public function destructor() : Void{

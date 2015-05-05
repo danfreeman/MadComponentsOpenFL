@@ -99,7 +99,7 @@ class Attributes extends Rectangle
     }
     
     
-    /**
+/**
 * Extracts Attribute properties from XML
 */
     public function parse(xml : MadXML) : Void{
@@ -155,7 +155,7 @@ class Attributes extends Rectangle
         _id = xml.has.id ? xml.att.id : "";
     }
     
-    /**
+/**
 * Returns a duplicate of this Attributes class
 */
     public function copy(xml : MadXML = null, container : Bool = false) : Attributes{
@@ -174,28 +174,28 @@ class Attributes extends Rectangle
         return result;
     }
     
-    /**
+/**
 * Vertical gap between child components
 */
     private function get_paddingV() : Float {
         return _paddingV;
     }
     
-    /**
+/**
  * Horizontal gap between child components
  */
     private function get_paddingH() : Float {
         return _paddingH;
     }
     
-    /**
+/**
  * Main colour of component
  */
     private function get_colour() : Int{
         return _colour;
     }
     
-    /**
+/**
  * Main colour of component
  */
     private function set_colour(value : Int) : Int{
@@ -203,35 +203,35 @@ class Attributes extends Rectangle
         return value;
     }
     
-    /**
+/**
  * Scroll Bar Colour
  */
     private function get_scrollBarColour() : Int{
         return _scrollBarColour;
     }
     
-    /**
+/**
  * Background Colours
  */
     private function get_backgroundColours() : Array<Int>{
         return _colours;
     }
     
-    /**
+/**
  * true if alignH="fill", or width is specified
  */
     private function get_fillH() : Bool{
         return _alignH == FILL || _width > 0;
     }
     
-    /**
+/**
  * true if alignV="fill", or height is specified
  */
     private function get_fillV() : Bool{
         return _alignV == FILL || _height > 0;
     }
     
-    /**
+/**
  * Width of the component
  */
     private function get_widthH() : Float{
@@ -255,21 +255,21 @@ class Attributes extends Rectangle
         }
     }
     
-    /**
+/**
  * Is the container component scrollable?
  */
     //		public function get noScroll():Boolean {
     //			return _alignV == NO_SCROLL;
     //		}
     
-    /**
+/**
  * Initial visiblity of the component
  */
     private function get_visible() : Bool{
         return _visible;
     }
     
-    /**
+/**
  * Text Aligopenflnt
  */
     private function get_textAlign() : String{
@@ -302,7 +302,7 @@ class Attributes extends Rectangle
         return value;
     }
     
-    /**
+/**
  * Positions a component according to its positioning attributes
  */
     public function position(item : DisplayObject, inhibitV : Bool = false) : Void{

@@ -27,16 +27,7 @@
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 92
-        }
-        ,{
-             "path" : "Source/com/danielfreeman/madcomponents/UIInput.hx"
-            ,"useTabs" : true
-            ,"indentSize" : 4
-            ,"foldedRegions" : [
-
-            ]
-            ,"activeLine" : 87
+            ,"activeLine" : 6
         }
         ,{
              "path" : "Source/com/danielfreeman/madcomponents/UILabelX.hx"
@@ -45,16 +36,7 @@
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 34
-        }
-        ,{
-             "path" : "Source/com/danielfreeman/madcomponents/Attributes.hx"
-            ,"useTabs" : true
-            ,"indentSize" : 4
-            ,"foldedRegions" : [
-
-            ]
-            ,"activeLine" : 162
+            ,"activeLine" : 24
         }
         ,{
              "path" : "Source/com/danielfreeman/madcomponents/UI.hx"
@@ -72,7 +54,7 @@
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 855
+            ,"activeLine" : 542
         }
         ,{
              "path" : "Source/com/danielfreeman/madcomponents/UIForm.hx"
@@ -126,7 +108,7 @@
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 98
+            ,"activeLine" : 417
         }
         ,{
              "path" : "Source/com/danielfreeman/madcomponents/UIPicker.hx"
@@ -156,24 +138,6 @@
             ,"activeLine" : 147
         }
         ,{
-             "path" : "Source/com/danielfreeman/madcomponents/UIButton.hx"
-            ,"useTabs" : true
-            ,"indentSize" : 4
-            ,"foldedRegions" : [
-
-            ]
-            ,"activeLine" : 293
-        }
-        ,{
-             "path" : "Source/com/danielfreeman/madcomponents/UIImage.hx"
-            ,"useTabs" : true
-            ,"indentSize" : 4
-            ,"foldedRegions" : [
-
-            ]
-            ,"activeLine" : 151
-        }
-        ,{
              "path" : "Source/com/danielfreeman/madcomponents/UIActivity.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
@@ -183,16 +147,88 @@
             ,"activeLine" : 55
         }
         ,{
-             "path" : "Source/com/danielfreeman/madcomponents/UISearch.hx"
+             "path" : "Source/com/danielfreeman/extendedMadness/UIe.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 133
+            ,"activeLine" : 77
         }
         ,{
-             "path" : "Source/com/danielfreeman/extendedmadness/UITabPagesTop.hx"
+             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 129
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UIScrollDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 157
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UIFastDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 317
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/AnimationTimer.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 62
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UISwitch.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/Model.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIDividedList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UIGroupedList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/madcomponents/UILongList.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
@@ -207,37 +243,10 @@
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 588
+            ,"activeLine" : 486
         }
         ,{
-             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollTouchGrids.hx"
-            ,"useTabs" : true
-            ,"indentSize" : 4
-            ,"foldedRegions" : [
-
-            ]
-            ,"activeLine" : 738
-        }
-        ,{
-             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollDataGrids.hx"
-            ,"useTabs" : true
-            ,"indentSize" : 4
-            ,"foldedRegions" : [
-
-            ]
-            ,"activeLine" : 110
-        }
-        ,{
-             "path" : "Source/com/danielfreeman/extendedMadness/UISpecialDataGrid.hx"
-            ,"useTabs" : true
-            ,"indentSize" : 4
-            ,"foldedRegions" : [
-
-            ]
-            ,"activeLine" : 79
-        }
-        ,{
-             "path" : "Source/com/danielfreeman/extendedMadness/UICell.hx"
+             "path" : "Source/com/danielfreeman/madcomponents/UIRefresh.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
@@ -246,84 +255,138 @@
             ,"activeLine" : 0
         }
         ,{
-             "path" : "Source/com/danielfreeman/extendedMadness/UIe.hx"
+             "path" : "Source/com/danielfreeman/madcomponents/UIRenderer.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 77
+            ,"activeLine" : 0
         }
         ,{
-             "path" : "Source/com/danielfreeman/madcomponents/UIDividedList.hx"
+             "path" : "Source/com/danielfreeman/madcomponents/UISearch.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 66
+            ,"activeLine" : 0
         }
         ,{
-             "path" : "Source/com/danielfreeman/extendedMadness/UITickList.hx"
+             "path" : "Source/com/danielfreeman/madcomponents/UISlider.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 151
+            ,"activeLine" : 0
         }
         ,{
-             "path" : "Source/com/danielfreeman/extendedMadness/UIListHorizontal.hx"
+             "path" : "Source/com/danielfreeman/madcomponents/UIViewFlipper.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 130
+            ,"activeLine" : 0
         }
         ,{
-             "path" : "Source/com/danielfreeman/madcomponents/UILongList.hx"
+             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollDataGrids.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 133
+            ,"activeLine" : 0
         }
         ,{
-             "path" : "Source/com/danielfreeman/madcomponents/UISwitch.hx"
+             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollHorizontal.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 9
+            ,"activeLine" : 25
         }
         ,{
-             "path" : "Source/com/danielfreeman/madcomponents/Model.hx"
+             "path" : "Source/com/danielfreeman/extendedMadness/UIScrollTouchGrids.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 549
+            ,"activeLine" : 493
         }
         ,{
-             "path" : "project.xml"
+             "path" : "Source/com/danielfreeman/extendedMadness/UISegmentedControl.hx"
             ,"useTabs" : true
             ,"indentSize" : 4
             ,"foldedRegions" : [
 
             ]
-            ,"activeLine" : 12
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UISimpleDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UISpecialDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedMadness/UITickOneList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/extendedmadness/UISimpleDataGrid.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 0
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/MadXML.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 2
+        }
+        ,{
+             "path" : "Source/com/danielfreeman/MadXMLList.hx"
+            ,"useTabs" : true
+            ,"indentSize" : 4
+            ,"foldedRegions" : [
+
+            ]
+            ,"activeLine" : 1
         }
     ]
-    ,"activeFile" : "project.xml"
-    ,"openFLTarget" : "android"
+    ,"activeFile" : "Source/com/danielfreeman/extendedMadness/UIScrollTouchGrids.hx"
+    ,"openFLTarget" : "mac"
     ,"openFLBuildMode" : "Debug"
     ,"runActionType" : 2
-    ,"runActionText" : "haxelib run lime run \"%path%\" android"
-    ,"buildActionCommand" : "haxelib run lime build \"%path%\" android -debug"
+    ,"runActionText" : "haxelib run lime run \"%path%\" mac"
+    ,"buildActionCommand" : "haxelib run lime build \"%path%\" mac -debug"
     ,"hiddenItems" : [
 
     ]

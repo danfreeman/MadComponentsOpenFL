@@ -388,18 +388,18 @@ class UIList extends UIScrollVertical
 
 	private function clearHighlight(event : Event) : Void{
         clearPressed();
-        dispatchEvent(new Event(CLICKED_END, true));
+        dispatchEvent(new Event(CLICKED_END, true, true));
     }
 
 
 	private function dispatchClickedEnd() : Void{
 		if (!_classic) {
-            dispatchEvent(new Event(CLICKED, true));
+            dispatchEvent(new Event(CLICKED, true, true));
 			trace("index=", index);
             if (_touchTimer.currentCount < UIScrollVertical.TOUCH_DELAY) {
                 illuminate(-1, false, true);
                     if (_showPressed) {
-                        dispatchEvent(new Event(CLICKED_END, true));
+                        dispatchEvent(new Event(CLICKED_END, true, true));
                     }
                     else {
                         _highlightTimer.stop();
@@ -409,11 +409,11 @@ class UIList extends UIScrollVertical
 					
                 }
                 else {
-                    dispatchEvent(new Event(CLICKED_END, true));
+                    dispatchEvent(new Event(CLICKED_END, true, true));
                 }
             }
             else {
-                dispatchEvent(new Event(CLICKED_END, true));
+                dispatchEvent(new Event(CLICKED_END, true, true));
             }
         }
 
@@ -796,7 +796,7 @@ class UIList extends UIScrollVertical
  */  
 		private function resizeRefresh() : Void{
             if (_refresh != null) {
-                _slider.graphics.beginFill(_colours.length > (0) ? _colours[_colours.length - 1] : 0xF9F9F9);
+                _slider.graphics.beginFill((_colours.length > 0) ? _colours[_colours.length - 1] : 0xF9F9F9);
                 _slider.graphics.drawRect(0, -TOP, attributes.width, TOP);
                 _refresh.x = (_attributes.widthH - _refresh.width) / 2;
         }
@@ -995,7 +995,7 @@ class UIList extends UIScrollVertical
             //	}    
             //	else {  
                     
-               dispatchEvent(new Event((_classic) ? CLICKED : CLICK_START, true));
+               dispatchEvent(new Event((_classic) ? CLICKED : CLICK_START, true, true));
         }
     }
 		
@@ -1026,7 +1026,7 @@ class UIList extends UIScrollVertical
     
     private function doCancel() : Void{
         _pressedCell = _saveIndex;
-		dispatchEvent(new Event(CLICK_CANCEL, true));
+		dispatchEvent(new Event(CLICK_CANCEL, true, true));
         _highlight.graphics.clear();
         if (_showPressed && _pressedCell >= 0) {
             illuminate(_pressedCell, false);
@@ -1085,10 +1085,10 @@ class UIList extends UIScrollVertical
             for (record in value){
                 customCell(record, position);
 				position += _cell.height + _attributes.paddingV;
-			position = toPixelBoundary(this, 0, position).y;
+				position = toPixelBoundary(this, 0, position).y;
                 drawCell(position, _count, record);
                 position += _attributes.paddingV;
-			position = toPixelBoundary(this, 0, position).y;
+				position = toPixelBoundary(this, 0, position).y;
                 _count++;
             }
         }
@@ -1124,7 +1124,7 @@ class UIList extends UIScrollVertical
         //      if (!UI.isContainer(localName) && !UI.isForm(localName)) {
         //		_renderer = XML("<horizontal>" + _renderer.toXMLString() + "</horizontal>");
         //	}
-            _cell = newRow(Reflect.hasField(record,"_renderer") ? MadXML.parse(record._renderer) : _renderer);
+            _cell = newRow(Reflect.hasField(record, "_renderer") ? MadXML.parse(record._renderer) : _renderer);
             _cell.x = _cellRendererLeft + _attributes.paddingH;
             _cell.y = Math.ceil(position);
             if (Std.is(_cell, Sprite)) {

@@ -699,7 +699,7 @@ class UIForm extends MadMasking implements IContainerUI
 		/**
 		 *  Background chrome if this form contains picker components
 		 */
-		private function pickerBackground(attributes : Attributes) : Void{return;
+		private function pickerBackground(attributes : Attributes) : Void{
 			var colour : Int = (attributes.backgroundColours.length > 0) ? attributes.backgroundColours[0] : 0x666666;
 			graphics.clear();
 			graphics.beginFill((attributes.backgroundColours.length > 1) ? attributes.backgroundColours[1] : colour);
@@ -949,10 +949,10 @@ class UIForm extends MadMasking implements IContainerUI
 				var item : DisplayObject = getChildAt(i);
 				if (item.name == id) {
 					found = item;
-					if (found == null && (Std.is(item, IContainerUI))) {
-						found = cast((item), IContainerUI).findViewById(id, row, group);
-					}
-        	    }
+				}
+				if (found == null && (Std.is(item, IContainerUI))) {
+					found = cast((item), IContainerUI).findViewById(id, row, group);
+				}
 				i++;
       		}
 		return found;

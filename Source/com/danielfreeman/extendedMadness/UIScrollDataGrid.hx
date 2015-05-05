@@ -104,7 +104,7 @@ class UIScrollDataGrid extends UIScrollXY
     private var _fixedColumnColours : Array<Int> = null;
     private var _dataGrid : UISimpleDataGrid;
     private var _fixedColumnPosition : Float = 0;
-    private var _columnSlideTimer : Timer = new Timer(50, STEPS);
+    private var _columnSlideTimer : AnimationTimer;// = new Timer(50, STEPS);
     private var _slideFixedColumns : Bool = false;
     private var _fixedColumnDelta : Float = 0;
     private var _trigger0 : Bool = false;
@@ -123,6 +123,7 @@ class UIScrollDataGrid extends UIScrollXY
         }  //		_fastLayout = xml.@fastLayout == "true";  
         
         super(screen, noChildren(xml), attributes);
+		_columnSlideTimer = new AnimationTimer(this, STEPS);
         super.layout(attributes);
         if (xml.has.slideFixedColumns && xml.att.slideFixedColumns == "true") {
             _slideFixedColumns = true;
@@ -131,7 +132,7 @@ class UIScrollDataGrid extends UIScrollXY
         autoScrollEnabled();
     }
     
-    /**
+/**
  *  Slide the fixed columns into position
  */
     private function slideFixedColumnsIn() : Void{
@@ -147,7 +148,7 @@ class UIScrollDataGrid extends UIScrollXY
         }
     }
     
-    /**
+/**
  *  Slide the fixed columns left off the screen
  */
     private function slideFixedColumnsOut() : Void{
@@ -158,7 +159,7 @@ class UIScrollDataGrid extends UIScrollXY
         }
     }
     
-    /**
+/**
  *  Fixed column movement slide handler
  */
     private function columnSlideMovement(event : Event) : Void{
@@ -182,7 +183,7 @@ class UIScrollDataGrid extends UIScrollXY
         return MadXML.parse(result);
     }
     
-    /**
+/**
  *  Render the row background colours for fixed columns
  */
     private function colourFixedColumns(dataGrid : UISimpleDataGrid, flag : Bool = false) : Void{
@@ -207,7 +208,7 @@ class UIScrollDataGrid extends UIScrollXY
         }
     }
     
-    /**
+/**
  *  Put headers, fixed columns, and grid cells all within their appropriate layers
  */
     private function sliceTable(dataGrid : UISimpleDataGrid) : Void{
@@ -244,7 +245,7 @@ class UIScrollDataGrid extends UIScrollXY
         _slider.cacheAsBitmap = true;
     }
     
-    /**
+/**
  *  Create sliding parts of container
  */
     override private function createSlider(xml : MadXML, attributes : Attributes) : Void{
@@ -284,7 +285,7 @@ class UIScrollDataGrid extends UIScrollXY
         return value;
     }
     
-    /**
+/**
  *  Respond to scroll gestures
  */
     override private function mouseMove(event : TimerEvent) : Void{
@@ -336,18 +337,20 @@ class UIScrollDataGrid extends UIScrollXY
     
     
     override private function set_sliderY(value : Float) : Float{
-        super.sliderY = value;
+		trace("sliderY=", value, Math.abs(sliderY - value));
+		value = toPixelBoundaryDouble(this, 0, value).y;
+		super.sliderY = value;
         if (_fixedColumnSlider != null) {
             _fixedColumnSlider.y = sliderY;
         }
-        _headerFixedColumnSlider.y = value > (0) ? value : 0;
+        _headerFixedColumnSlider.y = (value > 0) ? value : 0;
         if (_headerSlider != null) {
-            _headerSlider.y = value > (0) ? value : 0;
+            _headerSlider.y = (value > 0) ? value : 0;
         }
         return value;
     }
     
-    /**
+/**
  * Set datagrid data
  */
     public function set_gridData(value : Array<Array<Dynamic>>) : Array<Array<Dynamic>>{
@@ -357,7 +360,7 @@ class UIScrollDataGrid extends UIScrollXY
         return value;
     }
     
-    /**
+/**
  * Set column headings and datagrid data
  */
     private function set_headerAndData(value : Array<Array<Dynamic>>) : Array<Array<Dynamic>>{
@@ -379,7 +382,7 @@ class UIScrollDataGrid extends UIScrollXY
         _dataGrid.clear();
     }
     
-    /**
+/**
  * Set number of fixed columns
  */
     private function set_fixedColumns(value : Int) : Int{
@@ -397,7 +400,7 @@ class UIScrollDataGrid extends UIScrollXY
     //			_dataGrid.invalidate(readGrid);
     //		}
     
-    /**
+/**
  * Render datagrid with padding for every column
  */
     public function compact(padding : Bool = false) : Void{
@@ -465,7 +468,7 @@ class UIScrollDataGrid extends UIScrollXY
         }
     }
     
-    /**
+/**
  *  Rearrange the layout to new screen dimensions
  */
     override public function layout(attributes : Attributes) : Void{
@@ -482,7 +485,7 @@ class UIScrollDataGrid extends UIScrollXY
         autoScrollEnabled();
     }
     
-    /**
+/**
  * Find a particular row,column (group) inside the grid
  */
     override public function findViewById(id : String, row : Int = -1, group : Int = -1) : DisplayObject{
@@ -512,7 +515,7 @@ class UIScrollDataGrid extends UIScrollXY
         super.adjustMaximumSlide();
     }
     
-    /**
+/**
  * If set to true, a right or left scroll gesture will temporarily slide the fixed
  * columns out of the way - so you can see more data columns.
  */
@@ -521,7 +524,7 @@ class UIScrollDataGrid extends UIScrollXY
         return value;
     }
     
-    /**
+/**
  * Set datagrid title
  */
     private function set_title(value : String) : String{
@@ -529,7 +532,7 @@ class UIScrollDataGrid extends UIScrollXY
         return value;
     }
     
-    /**
+/**
  * Set datagrid row colours
  */
     private function set_colours(value : Array<Int>) : Array<Int>{
@@ -543,7 +546,7 @@ class UIScrollDataGrid extends UIScrollXY
         return _dataGrid.colours;
     }
     
-    /**
+/**
  * Direct access to the UIFastDataGrid class
  */
     private function get_dataGrid() : UISimpleDataGrid{

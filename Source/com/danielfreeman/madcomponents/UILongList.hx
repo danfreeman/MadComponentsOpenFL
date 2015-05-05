@@ -1,4 +1,4 @@
-  /**
+/**
  * <p>Original Author: Daniel Freeman</p>
  *
  * <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -108,7 +108,7 @@ class UILongList extends UIList
         super(screen, xml, attributes);
     }
     
-    /**
+/**
  *  Start a list with custom renderers
  */
     override private function customRenderers(value : Array<Dynamic>, position : Float = -1) : Void{
@@ -142,7 +142,7 @@ class UILongList extends UIList
         _lazy = true;
     }
     
-    /**
+/**
  *  Start a list with simple default label rows
  */
     override private function simpleRenderers(value : Array<Dynamic>, position : Float = -1) : Void{
@@ -192,7 +192,7 @@ class UILongList extends UIList
         }
     }
     
-    /**
+/**
  *  Generate simple list labels between a specified start and end index
  */
     private function lazySimpleRenderers(value : Array<Dynamic>, startIndex : Int, endIndex : Int) : Void{
@@ -206,14 +206,14 @@ class UILongList extends UIList
         }
     }
     
-    /**
+/**
  *  Is this row off screen?
  */
     private function offScreen(cell : DisplayObject) : Bool{
         return cell.y + cell.height < -_slider.y || cell.y + _slider.y > _attributes.height;
     }
     
-    /**
+/**
  *  All off-screen rows are marked recyclable
  */
     private function setRecycleList() : Void{
@@ -237,7 +237,7 @@ class UILongList extends UIList
         }
     }
     
-    /**
+/**
  *  Re-use a recyclable row, otherwise instanciate a new one
  */
     override private function newRow(rendererXML : MadXML) : DisplayObject{
@@ -261,7 +261,7 @@ class UILongList extends UIList
         }
     }
     
-    /**
+/**
  *  When the list is scrolled, generate missing rows
  */
     override private function sliderMoved() : Void{
@@ -288,7 +288,7 @@ class UILongList extends UIList
 		}
     }
     
-    /**
+/**
  *  Rearrange the layout to new screen dimensions
  */
     override public function layout(attributes : Attributes) : Void{
@@ -297,7 +297,7 @@ class UILongList extends UIList
         sliderMoved();
     }
     
-    /**
+/**
  *  Set filtered data
  */
     override private function set_filteredData(value : Array<Dynamic>) : Array<Dynamic>{

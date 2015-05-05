@@ -363,7 +363,8 @@ class UIScrollDataGrids extends UIScrollDataGrid
     
     
     override private function set_sliderY(value : Float) : Float{
-        super.sliderY = value;
+        value = toPixelBoundaryDouble(this, 0, value).y;
+		super.sliderY = value;
         _titleSlider.y = value;
         _headerTitleSlider.y = (value > 0) ? value : 0;
         if (_status != null) {
@@ -604,7 +605,7 @@ class UIScrollDataGrids extends UIScrollDataGrid
         autoScrollEnabled();
     }
     
-    /**
+/**
  * Find a particular row,column (group) inside the grid
  */
     override public function findViewById(id : String, row : Int = -1, group : Int = -1) : DisplayObject{

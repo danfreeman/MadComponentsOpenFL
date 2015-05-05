@@ -1,4 +1,4 @@
-  /**
+/**
  * <p>Original Author: Daniel Freeman</p>
  *
  * <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -128,7 +128,7 @@ class UISearch extends UIInput implements IComponentUI
         _label.y = (HEIGHT - WINDOW_HEIGHT) / 2 + 1.0;
     }
     
-    /**
+/**
  *  Set width of search component
  */
     override private function set_fixwidth(value : Float) : Float{

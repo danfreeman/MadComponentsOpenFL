@@ -84,7 +84,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         if (xml.has.wordWrap) {
             _wordWrap = xml.att.wordWrap == "true";
         }
-			_colSpan = !xml.has.colspan || xml.att.colSpan != "false";
+		_colSpan = !xml.has.colspan || xml.att.colSpan != "false";
         _colSpanWrap = !xml.has.colSpanWrap || xml.att.colSpanWrap != "false";
         super(screen, xml, attributes);
     }
@@ -104,7 +104,7 @@ class UIFastDataGrid extends UISimpleDataGrid
     }
     
     
-    /**
+/**
  *  Render row colours
  */
     override public function drawBackground() : Void{
@@ -203,7 +203,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         drawBackground();
     }
     
-    /**
+/**
  *  Shift rows up or down - utilised when inserting or deleting rows
  */
     private function shiftRows(index : Int, deltaHeight : Float) : Void{
@@ -215,7 +215,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         }
     }
     
-    /**
+/**
  *  Insert a row within the datagrid
  */
     public function insertRow(rowIndex : Int, rowData : Array<Dynamic>) : Void{
@@ -242,7 +242,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         drawBackground();
     }
     
-    /**
+/**
  *  Delete a specific row from the datagrid
  */
     public function deleteRow(rowIndex : Int) : Void{
@@ -267,7 +267,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         return result;
     }
     
-    /**
+/**
  *  Realign and adjust the datagrid cell positions
  */
     override private function rejig() : Void{
@@ -315,6 +315,7 @@ class UIFastDataGrid extends UISimpleDataGrid
                     maxHeight = cell.height;
                 }
             }
+	//		maxHeight = toPixelBoundary(this, 0, lastY + maxHeight).y - lastY;
             for (cell0 in row){
                 cell0.fixheight = maxHeight;
             }
@@ -339,7 +340,7 @@ class UIFastDataGrid extends UISimpleDataGrid
     }
     
     
-    /**
+/**
  *  Convert y coordinate to row index
  */
     override public function yToRow(y : Float) : Int{
@@ -363,7 +364,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         return result;
     }
     
-    /**
+/**
  *  Reset datagrid text size
  */
     private function set_textSize(value : Float) : Float{
@@ -379,7 +380,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         return value;
     }
     
-    /**
+/**
  * Set datagrid data
  */
     override private function setData(value : Array<Array<Dynamic>>, includeHeader : Bool = false) : Void{
@@ -402,7 +403,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         }
     }
     
-    /**
+/**
  * Refresh datagrid with new data
  */
     private function set_dataProvider(value : Array<Array<Dynamic>>) : Array<Array<Dynamic>>{
@@ -411,11 +412,11 @@ class UIFastDataGrid extends UISimpleDataGrid
         return value;
     }
     
-    /**
+/**
  * Refresh datagrid
  */
     public function invalidate(readGrid : Bool = false, includeHeader : Bool = false) : Void{
-        var start : Int = !includeHeader && (_hasHeader) ? 1 : 0;
+        var start : Int = (!includeHeader && _hasHeader) ? 1 : 0;
         var header : Bool = includeHeader && _hasHeader;
         var format : TextFormat = (header) ? _headerStyle : _dataStyle;
         for (i in start..._table.length){
@@ -495,7 +496,7 @@ class UIFastDataGrid extends UISimpleDataGrid
         }
     }
     
-    /**
+/**
  *  Attempt to make the datagrid width fits exactly the width of the screen
  */
     override public function compact(padding : Bool = false) : Void{
@@ -557,12 +558,12 @@ class UIFastDataGrid extends UISimpleDataGrid
         return _table[value][0].height;
     }
     
-    /**
+/**
  *  Add and remove rows and columns to resize the datagrid efficiently
  */
     private function newDimensions(rows : Int, columns : Int) : Void{
         var oldRows : Int = _table.length;
-        var oldColumns : Int = _table.length > (0) ? _table[0].length : 0;
+        var oldColumns : Int = (_table.length > 0) ? _table[0].length : 0;
         var header : Bool = _hasHeader;
         if (rows < oldRows) {
             for (r0 in rows...oldRows){

@@ -4,7 +4,8 @@ import openfl.display.StageQuality;
 import openfl.display.StageScaleMode;
 import openfl.display.StageAlign;
 import openfl.display.Sprite;
-import com.danielfreeman.madcomponents.UI;
+import com.danielfreeman.*;
+import com.danielfreeman.madcomponents.*;
 import com.danielfreeman.extendedmadness.UIe;
 import com.danielfreeman.extendedmadness.UISpecialDataGrid;
 import openfl.display.BitmapData;
@@ -21,6 +22,12 @@ import openfl.geom.Point;
 @:bitmap("Assets/ldpi/stat_notify_sync.png") class SYNC_LD extends BitmapData {}
 @:bitmap("Assets/mdpi/stat_notify_sync.png") class SYNC_MD extends BitmapData {}
 @:bitmap("Assets/hdpi/stat_notify_sync.png") class SYNC_HD extends BitmapData {}
+
+@:bitmap("Assets/buddha.jpg") class BUDDHA extends BitmapData {}
+@:bitmap("Assets/dragon.jpg") class DRAGON extends BitmapData {}
+@:bitmap("Assets/faces.jpg") class FACES extends BitmapData {}
+@:bitmap("Assets/monks.jpg") class MONKS extends BitmapData {}
+@:bitmap("Assets/temple.jpg") class TEMPLE extends BitmapData {}
 
 	
 class Main extends Sprite {
@@ -137,6 +144,15 @@ class Main extends Sprite {
 					<Here/>
 				</group>
 			</data>';
+						
+						
+	private static inline var SCROLL:String =
+		
+		'<scrollVertical>
+			<button/>
+			<button/>
+			<button/>
+		</scrollVertical>';
 
 	
 	private static inline var LIST:String =
@@ -187,8 +203,8 @@ class Main extends Sprite {
 			<slider background="#FF9900"/>
 			<button colour="#FF9999" alignH="fill">abcdef</button>
 			<switch/>
-			<columns GapH="0">
-				<picker>'+ DATA +'</picker>
+			<columns gapH="0">
+// 				<picker id="picker0" gapH="4">'+ DATA +'</picker>
 				<picker>'+ DATA +'</picker>
 				<picker>'+ DATA +'</picker>
 			</columns>
@@ -404,7 +420,101 @@ class Main extends Sprite {
 				<image>ERROR_HD</image>
 				<image>SYNC_HD</image>
 			</touch>';
+					
+					
+	private static inline var LIST_MODEL0:String =
+		
+			'<list labelField="name">
+				<model url="http://127.0.0.1/test.json" action="loadJSON" parse=".trends."/>
+			</list>';
+					
+					
+	private static inline var LIST_MODEL1:String =
+		
+			'<list>
+				<model url="http://127.0.0.1/people.xml" action="loadJSON" parse=".trends.">
+					<name>label</name>
+				</model>
+			</list>';
+					
+					
+	private static inline var LIST_MODEL2:String =
+		
+			'<list>
+				<model url="http://127.0.0.1/test.json" action="loadJSON" parse=".trends."/>
+				<vertical>
+					<label id="name"/>
+				</vertical>	
+			</list>';
+						
+						
+	private static inline var XML_MODEL:String =
+		
+			'<list>
+				<model url="http://127.0.0.1/people.xml" action="loadXML">
+					<list>
+						<item gender="">
+							<name/>
+							<age/>
+						</item>
+					</list>
+				</model>
+				<renderer>
+					<label id="name"/>
+					<label id="age"/>
+					<label id="gender"/>
+				</renderer>
+			</list>';
+					
 
+	private static inline var PAGE0:String = '<image alignV="centre" alignH="centre">BUDDHA</image>';
+		
+	private static inline var PAGE1:String = '<image alignV="centre" alignH="centre">DRAGON</image>';
+		
+	private static inline var PAGE2:String = '<image alignV="centre" alignH="centre">FACES</image>';
+		
+	private static inline var PAGE3:String = '<image alignV="centre" alignH="centre">MONKS</image>';
+		
+	private static inline var PAGE4:String = '<image alignV="centre" alignH="centre">TEMPLE</image>';
+		
+		
+	private static inline var MENU0:String =
+			
+			'<data>
+				<buddha/>
+				<dragon/>
+				<item label="more..."/>
+			</data>';
+		
+		
+	private static inline var MENU1:String =
+			
+			'<data>
+				<faces/>
+				<monks/>
+				<temple/>
+			</data>';
+		
+		
+	private static inline var NESTED_NAVIGATION_PAGES:String =
+		
+			'<navigationPages id="outer" title="Nested Nav">
+				<list>'													
+					+ MENU0 +
+				'</list>'
+				+ PAGE0
+				+ PAGE1 +
+				'<navigationPages id="inner">
+					<list>'													
+						+ MENU1 +
+					'</list>'
+					+ PAGE2 
+					+ PAGE3
+					+ PAGE4 +
+				'</navigationPages>
+			</navigationPages>';
+
+						
 					
 	
 	public function new (screen:Sprite) {
@@ -418,7 +528,9 @@ class Main extends Sprite {
         stage.scaleMode = StageScaleMode.NO_SCALE;
         stage.quality = StageQuality.LOW;
 	
-		UIe.create(this, MadXML.parse(LISTR));
+		UIe.create(this, MadXML.parse(GRID_LAYOUT1));
+	//	cast (UI.findViewById("picker0"), UIPicker).setIndex(3, true);
+
 
 	}
 	

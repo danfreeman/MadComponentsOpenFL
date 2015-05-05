@@ -109,7 +109,7 @@ class UIPages extends MadMasking implements IContainerUI
     private var _lastPage : DisplayObject;
     private var _slideX : Float = 0;
     private var _slideY : Float = 0;
-    private var _slideTimer : Timer = new Timer(SLIDE_INTERVAL, STEPS);
+    private var _slideTimer : AnimationTimer;// = new Timer(SLIDE_INTERVAL, STEPS);
     
     //	protected var _xml:XML;
     //	protected var _attributes:Attributes;
@@ -130,7 +130,6 @@ class UIPages extends MadMasking implements IContainerUI
     
     public function new(screen : Sprite, xml : MadXML, attributes : Attributes)
     {
-
         super(null, xml, attributes);
         _attributes = attributes.copy(xml);
         
@@ -148,6 +147,7 @@ class UIPages extends MadMasking implements IContainerUI
         _slideOver = xml.has.slideOver && xml.att.slideOver == "true";
         
         screen.addChildAt(this, 0);
+		_slideTimer = new AnimationTimer(this, STEPS);
         var children : MadXMLList = xml.children();
         var index : Int = 0;
 		for (child0 in children) {
@@ -165,14 +165,14 @@ class UIPages extends MadMasking implements IContainerUI
             //	page.visible = false;
             setVisible(page, false);
             _pages.push(page);
-        }
+        	}
+		}
         setInitialPage();
         _slideTimer.addEventListener(TimerEvent.TIMER, slide);
         
         startMasking();
         drawShade();
     }
-}
     
     
     private function childAttributes(index : Int) : Attributes{
@@ -182,7 +182,7 @@ class UIPages extends MadMasking implements IContainerUI
     
     public function setVisible(page : DisplayObject, value : Bool) : Void{
         if (Std.is(page, MadSprite)) {
-            cast((page), MadSprite).isVisible = value;
+            cast(page, MadSprite).isVisible = value;
         }
         else {
             page.visible = value;
@@ -221,7 +221,7 @@ class UIPages extends MadMasking implements IContainerUI
     
     private function get_xml() : MadXML{
         return _xml;
-    }
+	}
     
 /**
  *  Rearrange the layout to new screen dimensions
@@ -348,13 +348,17 @@ class UIPages extends MadMasking implements IContainerUI
                 }
 				_thisPage.x = -((_over) ? UNDER : 1.0) * _attributes.width + _attributes.x;
                 startSlide();
-            case SLIDE_UP:_thisPage.y = _attributes.height + _attributes.y;
+            case SLIDE_UP:
+				_thisPage.y = _attributes.height + _attributes.y;
                 startSlide();
-            case SLIDE_DOWN:startSlide((_attributes.height + _attributes.y) / STEPS);
-            case DRAWER_UP:_drawer = cast((_thisPage), UIForm);
+            case SLIDE_DOWN:
+				startSlide((_attributes.height + _attributes.y) / STEPS);
+            case DRAWER_UP:
+				_drawer = cast((_thisPage), UIForm);
                 _thisPage.y = _attributes.height + _attributes.y;
                 startSlide(-_drawerHeight / STEPS);
-            case DRAWER_DOWN:_thisPage.y = _attributes.height + _attributes.y - _drawerHeight;
+            case DRAWER_DOWN:
+				_thisPage.y = _attributes.height + _attributes.y - _drawerHeight;
                 if (_shade.parent != null) {
                     _shade.parent.removeChild(_shade);
                 }
@@ -387,9 +391,8 @@ class UIPages extends MadMasking implements IContainerUI
         //	_thisPage.cacheAsBitmap=true;
         //	_lastPage.cacheAsBitmap=true;
         _slideX = (_attributes.x - _thisPage.x) / STEPS;
-        _slideY = ((slideY == 0)) ? (_attributes.y - _thisPage.y) / STEPS : slideY;
-        
-        _slideTimer.reset();
+        _slideY = (slideY == 0) ? (_attributes.y - _thisPage.y) / STEPS : slideY;
+		_slideTimer.reset();
         _slideTimer.start();
         dispatchEvent(new Event(Event.CHANGE));
     }
@@ -427,7 +430,7 @@ class UIPages extends MadMasking implements IContainerUI
     
     private function delta(t : Float, increment : Float) : Float{
         if (_easing) {
-            return t == (0) ? 0 : increment * STEPS * (easing(t) - easing(t - 1 / STEPS));
+            return (t == 0) ? 0 : increment * STEPS * (easing(t) - easing(t - 1 / STEPS));
         }
         else {
             return increment;
@@ -475,13 +478,14 @@ class UIPages extends MadMasking implements IContainerUI
 			trace("abort slide");
 			return;
 		}
-        var t : Float = cast((event.currentTarget), Timer).currentCount / STEPS;
-	//	trace("lastPage", _lastPage, "thisPage", _thisPage);
-        _lastPage.x += (((_over && _slideX < 0)) ? UNDER : (((_over && _slideX > 0)) ? 1 / UNDER : 1.0)) * delta(t, _slideX);
+    //    var t : Float = cast(event.currentTarget, Timer).currentCount / STEPS;
+		var t : Float = _slideTimer.currentCount / STEPS;
+		_lastPage.x += ((_over && _slideX < 0) ? UNDER : ((_over && _slideX > 0) ? 1 / UNDER : 1.0)) * delta(t, _slideX);
         _thisPage.x += delta(t, _slideX);
         _thisPage.y += delta(t, _slideY);
-		if (cast((event.currentTarget), Timer).currentCount == STEPS) {
-            slideComplete();
+//		if (cast((event.currentTarget), Timer).currentCount == STEPS) {
+		if (_slideTimer.currentCount == STEPS) {
+			slideComplete();
         }
     }
     
@@ -494,7 +498,7 @@ class UIPages extends MadMasking implements IContainerUI
  *  Make the previous page invisible
  */
     private function removeLastPage() : Void{
-        //	_lastPage.visible = false;
+    //	_lastPage.visible = false;
         setVisible(_lastPage, false);
         _lastPage = null;
     }

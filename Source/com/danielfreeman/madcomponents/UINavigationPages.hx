@@ -78,17 +78,20 @@ class UINavigationPages extends UINavigation
     }
     
     
-    public function backChain() : Bool{
-        var pageContents : DisplayObject = ((Std.is(_thisPage, Sprite))) ? cast((_thisPage), Sprite).getChildAt(0) : null;
-        if (!(Std.is(pageContents, UINavigationPages) && cast((pageContents), UINavigationPages).backChain())) {
+    public function backChain() : Bool {
+        var pageContents : DisplayObject = Std.is(_thisPage, Sprite) ? cast(_thisPage, Sprite).getChildAt(0) : null;
+		trace(name, "_______backChain", _thisPage, pageContents);
+        if (!(Std.is(pageContents, UINavigationPages) && cast(pageContents, UINavigationPages).backChain())) {
             if (!_slideTimer.running && _autoBack && _page > 0) {
                 if (_autoTitle != "") {
                     title = _titles[0];
                 }
                 goToPage(0, UIPages.SLIDE_RIGHT);
+				trace(name, "_______TRUE");
                 return true;
             }
         }
+		trace(name, "_______FALSE");
         return false;
     }
     
@@ -97,18 +100,20 @@ class UINavigationPages extends UINavigation
  *  Go forward handler
  */
     override private function goForward(event : Event) : Void{
+		event.stopPropagation();  // Doesn't work in OpenFL
+		trace(name, "_____goForward");
         if (!_slideTimer.running) {
-            _pressedCell = cast((event.target), UIList).index;
-            _row = cast((event.target), UIList).row;
+            _pressedCell = cast(event.target, UIList).index;
+            _row = cast(event.target, UIList).row;
             if (_autoForward) {
-                if (_autoTitle != "" && Reflect.field(_row, _autoTitle)) {
+                if (_autoTitle != "" && Reflect.hasField(_row, _autoTitle)) {
                     title = _titles[_pressedCell + 1] = Reflect.field(_row, _autoTitle);
                 }
                 var newPage : Int = Math.round(Math.min(_pressedCell + 1, _pages.length - 1));
                 goToPage(newPage, UIPages.SLIDE_LEFT);
             }
         }
-        event.stopImmediatePropagation();
+		
     }
     
 /**

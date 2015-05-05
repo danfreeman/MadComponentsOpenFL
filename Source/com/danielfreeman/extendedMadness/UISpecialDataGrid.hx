@@ -103,7 +103,7 @@ override private function rejig() : Void {
                                     position = rightPosition;
                                 }
                                 else if (Std.is(node, DisplayObject)) {
-                                    cast((node), DisplayObject).x = position;trace(node,".x=",position);
+                                    cast((node), DisplayObject).x = position;
                                     cast((node), DisplayObject).y = cell.y + _imageMarginV;
                                     position += cast((node), DisplayObject).width + _imageMarginH;
                                 }

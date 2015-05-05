@@ -74,7 +74,7 @@ class UIScrollXY extends UIScrollVertical
     private var _offsetX : Float = 0;
     private var _stopY : Bool;
     private var _tapToScale : Float = -1;
-    private var _scaleTimer : Timer = new Timer(50, STEPS);
+    private var _scaleTimer : AnimationTimer;// = new Timer(50, STEPS);
     private var _thisPoint : Point;
     private var _sliderPoint : Point;
     private var _oldScale : Float;
@@ -114,6 +114,7 @@ class UIScrollXY extends UIScrollVertical
     public function new(screen : Sprite, xml : MadXML, attributes : Attributes)
     {
         super(screen, xml, attributes);
+		_scaleTimer = new AnimationTimer(this, STEPS);
         _auto = xml.has.auto && xml.att.auto == "true";
         _lockSides = xml.has.lockSides && xml.att.lockSides == "true";
         _lockTopBottom = xml.has.lockTopBottom && xml.att.lockTopBottom == "true";

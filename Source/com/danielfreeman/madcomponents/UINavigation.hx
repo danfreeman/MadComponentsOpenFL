@@ -107,10 +107,13 @@ class UINavigation extends UIPages
 	
 	public function new(screen : Sprite, xml : MadXML, attributes : Attributes, hasNavBar : Bool = true)
     {
+		trace(name, "______________________________hasNavBar=", hasNavBar);
 		var pagesAttributes : Attributes = attributes.copy(xml);
+		_hasNavBar = hasNavBar;
 		super(screen, xml, pagesAttributes);
 		_navigationBar = new UINavigationBar(this, xml, attributes);
-		_navigationBar.visible = hasNavBar;_hasNavBar = hasNavBar;
+		_navigationBar.visible = hasNavBar;
+		
 		_backKey = xml.has.backKey && xml.att.backKey == "true";
 		if (xml.has.autoForward) {
 			_autoForward = xml.att.autoForward == "true";
@@ -124,7 +127,7 @@ class UINavigation extends UIPages
 			_navigationBar.y = (_alt) ? pagesAttributes.height : 0;
         }
 		for (child in xml.children()){
-			 _fullPage.push(child.has.fullPage &&child.att.fullPage == "true");
+			 _fullPage.push(child.has.fullPage && child.att.fullPage == "true");
         }
 	//	super(screen, xml, pagesAttributes);
 		refreshMasking(attributes);
@@ -133,7 +136,8 @@ class UINavigation extends UIPages
 			if (_thisPage != null){
 				_thisPage.y = (_alt) ? 0 : UINavigationBar.HEIGHT;
 			}
-        }				
+        }
+			trace(name, "_________hasNavBar", hasNavBar, "_thisPage.y", _thisPage.y);
 		_navigationBar.backButton.addEventListener(MouseEvent.MOUSE_UP, goBack);
 		_navigationBar.backButton.visible = false;
 		addEventListener(UIList.CLICKED, goForward);
@@ -181,12 +185,14 @@ class UINavigation extends UIPages
 		private function set_fullPage(value : Bool) : Bool{
             _fullPage[_page] = value;
             doLayout();
-            _thisPage.y = ((!_hasNavBar || _alt || value)) ? 0 : UINavigationBar.HEIGHT;_navigationBar.visible = !value;
+            _thisPage.y = ((!_hasNavBar || _alt || value)) ? 0 : UINavigationBar.HEIGHT;
+			_navigationBar.visible = !value;
         return value;
     }
 
 
-		override private function get_attributes() : Attributes{return _fullPageAttributes;
+		override private function get_attributes() : Attributes{
+			return _fullPageAttributes;
     }
 
 
@@ -214,17 +220,17 @@ class UINavigation extends UIPages
             }
             _navigationBar.fixwidth = attributes.width;
             var pagesAttributes : Attributes = attributes.copy();
-            if (_hasNavBar) {  //_navigationBar.visible
+            if (_hasNavBar) {  
                 pagesAttributes.height -= UINavigationBar.HEIGHT;
-                pagesAttributes.y = (_alt) ? 0 : UINavigationBar.HEIGHT;
-                _navigationBar.y = (_alt) ? pagesAttributes.height : 0;
+                pagesAttributes.y = _alt ? 0 : UINavigationBar.HEIGHT;
+                _navigationBar.y = _alt ? pagesAttributes.height : 0;
             }
             super.layout(pagesAttributes);
-            if (_navigationBar.visible) {
-                _attributes.y = (_alt) ? 0 : UINavigationBar.HEIGHT;
+            if (_hasNavBar) { //_navigationBar.visible
+                _attributes.y = _alt ? 0 : UINavigationBar.HEIGHT;
                 }
             if (_thisPage != null) {
-                _thisPage.y = (_alt) ? 0 : UINavigationBar.HEIGHT;
+                _thisPage.y = (_alt || !_hasNavBar) ? 0 : UINavigationBar.HEIGHT;
             }
         refreshMasking(attributes);  
         
@@ -266,7 +272,7 @@ class UINavigation extends UIPages
 /**
  *  Go forward handler
  */  
-		private function goForward(event : Event) : Void{
+private function goForward(event : Event) : Void{
             if (!_slideTimer.running) {
                 _pressedCell = cast((event.target), UIList).index;
                 _row = cast((event.target), UIList).row;
@@ -282,7 +288,9 @@ class UINavigation extends UIPages
 /**
  *  Go back handler
  */  
-		private function goBack(event : MouseEvent = null) : Void{_savePageIndex = _page;if (!_slideTimer.running && _autoBack) {
+		private function goBack(event : MouseEvent = null) : Void{
+			_savePageIndex = _page;
+			if (!_slideTimer.running && _autoBack) {
                 if (_autoTitle != "") {
                     _navigationBar.text = ((_page > 1 && _titles[_page - 1])) ? _titles[_page - 1] : "";
                 }
@@ -309,7 +317,8 @@ class UINavigation extends UIPages
  */  
 		override private function doTransition(transition : String) : Void{var lastContainer : DisplayObject = cast((_lastPage), Sprite).getChildAt(0);
             if (Std.is(lastContainer, UIList)) {
-                _pressedCell = cast((lastContainer), UIList).index;_row = cast((lastContainer), UIList).row;
+                _pressedCell = cast((lastContainer), UIList).index;
+				_row = cast((lastContainer), UIList).row;
             }
             var thisContainer : DisplayObject = cast((_thisPage), Sprite).getChildAt(0);
             if (_row != null && Std.is(thisContainer, IContainerUI) && (_autoFill || (cast((thisContainer), IContainerUI).xml.has.autoFill && cast((thisContainer), IContainerUI).xml.att.autoFill != "false"))) {

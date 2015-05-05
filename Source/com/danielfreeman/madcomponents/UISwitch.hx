@@ -1,4 +1,4 @@
-  /**
+/**
  * <p>Original Author: Daniel Freeman</p>
  *
  * <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -64,7 +64,7 @@ class UISwitch extends MadSprite implements IComponentUI
     private var _sliderColour : Int = OFF_COLOUR;
     private var _state : Bool = false;
     private var _position : Float = 0;
-    private var _timer : Timer = new Timer(32, STEPS);
+    private var _timer : AnimationTimer;// = new Timer(32, STEPS);
     private var _deltaPosition : Float;
     private var _ready : Bool = false;
     
@@ -72,6 +72,7 @@ class UISwitch extends MadSprite implements IComponentUI
     public function new(screen : Sprite, xml : MadXML, attributes : Attributes)
     {
         super(screen, attributes);
+		_timer = new AnimationTimer(this, STEPS);
         if (xml.has.onColour) {
             _onColour = UI.toColourValue(xml.att.onColour);
         }
@@ -90,12 +91,13 @@ class UISwitch extends MadSprite implements IComponentUI
         _state = xml.has.state && xml.att.state == "true";
         addEventListener(MouseEvent.MOUSE_DOWN, mouseDown);
         _timer.addEventListener(TimerEvent.TIMER, animate);
+		
         drawComponent();
     }
     
     
     private function animate(event : TimerEvent) : Void{
-        var timer : Timer = cast((event.currentTarget), Timer);
+        var timer : AnimationTimer = _timer; //cast((event.currentTarget), AnimationTimer);
         var factor : Float = (timer.currentCount + 1) / STEPS;
         var position : Float = (1 - factor) * _position + factor * ((_state) ? 1.0 : 0.0);
         drawSwitch(position);
@@ -140,6 +142,7 @@ class UISwitch extends MadSprite implements IComponentUI
         }
         _deltaPosition += position;
         drawSwitch(position);
+		event.updateAfterEvent();
     }
     
     

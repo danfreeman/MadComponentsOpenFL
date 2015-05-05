@@ -153,7 +153,7 @@ class Model extends URLLoader
  * Filter and escape a string, removing odd characters.
  */
     public static function queryString(value : String) : String{
-		new EReg('[^\\x{20}-\\x{7E}\\s\\t\\n\\r]', "g").replace(value,"");
+		value = new EReg('\\x{20}-\\x{7E}|\\s|\\t|\\n|\\r]', "g").replace(value,"");
         value = StringTools.htmlEscape(value);
         return value;
     }
@@ -162,12 +162,12 @@ class Model extends URLLoader
  * htmlDecode a string
  */
     public static function htmlDecode(value : String) : String {
-		(new EReg('\\\\n', "g")).replace(value, "\n");
-		(new EReg('&amp;', "g")).replace(value, "&");
-		(new EReg('&quot;', "g")).replace(value, '\"');
-		(new EReg('&apos;', "g")).replace(value, "'");
-		(new EReg('&lt;', "g")).replace(value, "<");
-		(new EReg('&gt;', "g")).replace(value, ">");
+		value = (new EReg('\\\\n', "g")).replace(value, "\n");
+		value = (new EReg('&amp;', "g")).replace(value, "&");
+		value = (new EReg('&quot;', "g")).replace(value, '\"');
+		value = (new EReg('&apos;', "g")).replace(value, "'");
+		value = (new EReg('&lt;', "g")).replace(value, "<");
+		value = (new EReg('&gt;', "g")).replace(value, ">");
 		return value;
     }
     
@@ -176,9 +176,9 @@ class Model extends URLLoader
  * htmlEncode a string
  */
     public static function addSlashes(value : String) : String {
-    	(new EReg('\\"', "g")).replace(value, "\\\"");
-		(new EReg("\\'", "g")).replace(value, "\\'");
-		(new EReg('[\\x{00}-\\x{0C}\\x{0E}-\\x{1F}\\t]', "g")).replace(value, " ");
+    	value = (new EReg('\\"', "g")).replace(value, "\\\"");
+		value = (new EReg("\\'", "g")).replace(value, "\\'");
+		value = (new EReg('[\\x{00}-\\x{0C}\\x{0E}-\\x{1F}\\t]', "g")).replace(value, " ");
 		return value;
 	}
     
@@ -189,9 +189,6 @@ class Model extends URLLoader
         if (_action == "load" || _action == "loadXML") {
             loadXML();
 		}
-    //    else if (_action == "loadAMF") {
-    //        loadAMF();
-	//	}
         else if (_action == "loadJSON") {
             loadJSON();
 		}
@@ -231,7 +228,7 @@ class Model extends URLLoader
             url = _url;
 		}
         else { 
-        _url = url;
+        	_url = url;
 		}
         addEventListener(Event.COMPLETE, jsonIsLoaded);
         if (request == null) {
@@ -261,17 +258,17 @@ class Model extends URLLoader
  * Set the data within a list or form to an AMF object
  */
     private function set_dataAMF(value : Dynamic) : Dynamic{
-        _amfData = value;
+		_amfData = value;
         if (_path != "" && value != null) {
             value = followPath(value, _path);
 		}
 		if (Std.is(_parent, UIList)) {
             if (_schema == null) {
-                cast((_parent), UIList).data = value;
+                cast((_parent), UIList).data = cast(value, Array<Dynamic>);
             }
             else {
                 var arrayOfObjects : Array<Dynamic> = [];
-                for (record in Reflect.fields(value)){
+                for (record in cast(value, Array<Dynamic>)) {
 					var item : Dynamic = parseAMFlist(record, _schema.parent(), {});
                     if (item != null) {
                         arrayOfObjects.push(item);
@@ -292,10 +289,15 @@ class Model extends URLLoader
  */
     private function followPath(pointer : Dynamic, path : String) : Dynamic{
         var items : Array<String> = path.split(".");
-        for (item in items){
-            if (item == "") {
-                for (thing in Reflect.fields(pointer))
-                pointer = thing;
+        for (item in items) {
+			if (item == "") {
+				if (Std.is(pointer, Array)) {
+					pointer = cast(pointer, Array<Dynamic>)[0];
+
+				}
+				else {
+                	pointer = Reflect.fields(pointer)[0];
+				}
             }
             else {
                 pointer = Reflect.field(pointer, item);
@@ -309,7 +311,7 @@ class Model extends URLLoader
  */
     private function parseAMFlist(record : Dynamic, schema : MadXML, result : Dynamic, path : String = "") : Dynamic{
         var schemaChildren : MadXMLList = schema.children();
-        for (child in schemaChildren){
+        for (child in schemaChildren) {
             var field : String = child.name;
             var pathChild : String = path + "." + field;
             if (!child.hasChildren) {
@@ -334,7 +336,7 @@ class Model extends URLLoader
             url = _sendUrl;
 		}
         else { 
-        _sendUrl = url;
+        	_sendUrl = url;
 		}
         if (action == "sendAndLoadXML") { 
             addEventListener(Event.COMPLETE, isLoaded);
@@ -374,9 +376,9 @@ class Model extends URLLoader
  * XML data loaded handler
  */
     private function isLoaded(event : Event) : Void{
-		var regularExpression = ~/xmlns=[^\\"]*\\"[^\\"]*\\"'/g;
         var stringData : String = data;
-		regularExpression.replace(stringData, "");
+		stringData = (new EReg('<\\?[^>]*\\?>', "g")).replace(stringData, "");
+		stringData = (new EReg('\\x{20}-\\x{7E}|\\n|\\t', "g")).replace(stringData, "");
         dataXML = MadXML.parse(htmlDecode(stringData));
         dispatchEvent(new Event(LOADED));
         removeEventListener(Event.COMPLETE, isLoaded);
@@ -386,8 +388,7 @@ class Model extends URLLoader
  * JSON data loaded handler
  */
     private function jsonIsLoaded(event : Event) : Void{
-        //	dataAMF = com.danielfreeman.madcomponents.TinyJSON.parse(data);
-        dataAMF = haxe.Json.parse(data);
+		dataAMF = haxe.Json.parse(data);
         dispatchEvent(new Event(LOADED));
         removeEventListener(Event.COMPLETE, jsonIsLoaded);
     }
@@ -423,7 +424,7 @@ class Model extends URLLoader
 /**
  * Convert XML to an array of objects
  */
-    private function listData(xml : MadXML, schema : MadXML) : Array<Dynamic>{
+    private function listData(xml : MadXML, schema : MadXML) : Array<Dynamic> {
         var result : Array<Dynamic> = null;
         var items : MadXMLList = xml.children();
         if (schema == null) {
@@ -437,13 +438,14 @@ class Model extends URLLoader
             var schemaChildren : MadXMLList = schema.children();
             if (items.length() == 1 && schemaChildren.length() == 1 && schemaChildren.get(0).hasChildren) {
                 result = listData(items.get(0), schemaChildren.get(0));
-                if (result != null) 
+                if (result != null) {
                     return result;
+				}
             }
             if (items.length() > 1) {
                 result = [];
                 var schemaGrandChildren : MadXMLList = schemaChildren.get(0).children();
-                for (item in items){
+                for (item in items) {
                     if (schema.child0(item.name).length() > 0) {
                         var rowResult : Dynamic = listObject(item, schemaGrandChildren);
                         attributeValues(item, schemaChildren.get(0), rowResult);
@@ -459,22 +461,24 @@ class Model extends URLLoader
     private function attributeValues(item : MadXML, childSchema : MadXML, result : Dynamic) : Void{
         var schemaAttributes = childSchema.x.attributes();
         for (schemaAttributeKey in schemaAttributes) {
-            var schemaAttributeValue : String = childSchema.x.get(schemaAttributeKey);
-            Reflect.setField(result, (schemaAttributeValue != "") ? schemaAttributeValue : schemaAttributeKey, item.x.get(schemaAttributeKey));
-			 }
+			if (item.x.exists(schemaAttributeKey)) {
+            	var schemaAttributeValue : String = childSchema.x.get(schemaAttributeKey);
+				Reflect.setField(result, (schemaAttributeValue != "") ? schemaAttributeValue : schemaAttributeKey, item.x.get(schemaAttributeKey));
+			}
+		}
     }
     
 /**
  * Convert XML to an array of objects
  */
-    private function listValues(item : MadXML, childSchema : MadXML) : Map<String, String>{
-        var result : Map<String, String> = new Map<String, String>();
+    private function listValues(item : MadXML, childSchema : MadXML) : Dynamic {
+		var result : Dynamic = {};
         if (childSchema == null) {
             return xmlToObject(item);
         }
         else if (!item.hasChildren) {
             attributeValues(item, childSchema, result);
-            result[childSchema.name] = item.toString();
+            Reflect.setField(result, childSchema.name, item.toString());
             return result;
         }
         else {
@@ -486,10 +490,10 @@ class Model extends URLLoader
 /**
  * Convert XML branch to an array of objects
  */
-    private function listObject(item : MadXML, childSchema : MadXMLList, result : Dynamic = null) : Map<String, String>{
+    private function listObject(item : MadXML, childSchema : MadXMLList, result : Dynamic = null) : Dynamic {
         
         if (result == null) {
-            result = new Map<String, String>();
+			result = {};
             if (!item.hasChildren && childSchema.length() == 1 && childSchema.get(0).nodeKindIsText) {
                 Reflect.setField(result, childSchema.toString(), item.toString());
                 return result;
@@ -497,7 +501,7 @@ class Model extends URLLoader
         }
         
         for (child in childSchema)
-			if (child.nodeKindIsText) {  //?
+			if (!child.nodeKindIsText) {
             var tagName : String = child.name;
             if (!child.hasChildren) {
                 var field : String = child.toString();
@@ -523,11 +527,11 @@ class Model extends URLLoader
         var result : Dynamic = { };
         var children : MadXMLList = xml.children();
         if (children.length() == 1 && children.get(0).nodeKindIsText) {
-            Reflect.setField(result, xml.name, children.toString());
+            Reflect.setField(result, xml.name, children.get(0).toString());
         }
         else {
-			for (child in children) {
-                Reflect.setField(result, child.name, (!child.hasChildren) ? children.toString() : xmlToObject(child));
+			for (child in children) if (!child.nodeKindIsText) {
+                Reflect.setField(result, child.name, (!child.hasChildren) ? child.toString() : xmlToObject(child));
             }
         }
         return result;
@@ -536,7 +540,7 @@ class Model extends URLLoader
 /**
  * Traverse XML tree according to path
  */
-    private function xmlPath(xml : MadXML, path : String) : MadXML{
+    private function xmlPath(xml : MadXML, path : String) : MadXML {
         var pathArray : Array<String> = path.split(".");
         for (i in 1...pathArray.length){
 			xml = new MadXML(xml.x.elementsNamed(pathArray[i]).next());
@@ -547,7 +551,7 @@ class Model extends URLLoader
 /**
  * Prepare the data to send to the server
  */
-    public function sendData(sendBy : String = "") : Dynamic{
+    public function sendData(sendBy : String = "") : Dynamic {
         if (sendBy != "") {
             _sendBy = sendBy;
 		}

@@ -75,7 +75,7 @@ import openfl.display.InteractiveObject;
     public var scrollPositionY(get, set) : Float;
     public var data(never, set) : Dynamic;
     public var model(get, never) : Model;
-public static inline var STARTED : String = "scrollStarted";
+	public static inline var STARTED : String = "scrollStarted";
 	public static inline var STOPPED : String = "scrollStopped";
 	private static inline var DELTA_THRESHOLD : Float = 2.0;
 	private static inline var THRESHOLD : Float = 8.0;
@@ -110,9 +110,9 @@ public static inline var STARTED : String = "scrollStarted";
 	private var _endSlider : Float = -1;
 	private var _slider : Sprite;
 	private var _sliderPosition : Float = 0;
-	private var _touchTimer : Timer = new Timer(DELTA_TOUCH);
-	private var _moveTimer : Timer = new Timer(DELTA);
-	private var _dragTimer : Timer = new Timer(DELTA);
+	private var _touchTimer : AnimationTimer; // = new Timer(DELTA_TOUCH);
+	private var _moveTimer : AnimationTimer; // = new Timer(DELTA);
+	private var _dragTimer : AnimationTimer; // = new Timer(DELTA);
 	private var _clickTimer : Timer = new Timer(CLICK_DURATION, 1);
 	private var _distance : Float = 0;
 	private var _pressButton : DisplayObject;
@@ -139,6 +139,8 @@ public static inline var STARTED : String = "scrollStarted";
 	private var _noSwipeCount : Int = 0;
 	private var _profile : Int = SPEED;
 	
+	private var _actualDeltaY : Float;
+	
 	
 	public function new(screen : Sprite, xml : MadXML, attributes : Attributes)
     {
@@ -153,9 +155,13 @@ public static inline var STARTED : String = "scrollStarted";
 		_autoScrollEnabled = xml.has.scrollY && xml.att.scrollY == "auto";
 		_alwaysScrollBar = xml.has.alwaysScrollBar && xml.att.alwaysScrollBar == "true";
 		super(null, xml, attributes);
+
 		if (screen != null) {
 			screen.addChildAt(this, 0);
         }
+		_touchTimer = new AnimationTimer(this);
+		_moveTimer = new AnimationTimer(this);
+		_dragTimer = new AnimationTimer(this);
 		_border = xml.has.border ? xml.att.border : "";
 		if (xml.has.dampen) {
 			_dampen = Std.parseFloat(xml.att.dampen);
@@ -189,9 +195,9 @@ public static inline var STARTED : String = "scrollStarted";
 	
 	
 	private function addListeners() : Void{
-		_touchTimer.addEventListener(TimerEvent.TIMER, mouseMove);
-		_dragTimer.addEventListener(TimerEvent.TIMER, mouseDrag);
-		_moveTimer.addEventListener(TimerEvent.TIMER, movement);
+	_touchTimer.addEventListener(TimerEvent.TIMER, mouseMove);
+	_dragTimer.addEventListener(TimerEvent.TIMER, mouseDrag);
+	_moveTimer.addEventListener(TimerEvent.TIMER, movement);
     }
 	
 	
@@ -258,7 +264,8 @@ public static inline var STARTED : String = "scrollStarted";
     }
 	
 	
-	private function get_xml() : MadXML{return _xml;
+	private function get_xml() : MadXML{
+		return _xml;
     }
 	
 	
@@ -326,7 +333,8 @@ public static inline var STARTED : String = "scrollStarted";
 
 /**
  *  Refresh
- */  public function doLayout() : Void{
+ */  
+	public function doLayout() : Void{
             if (Std.is(_slider, UIForm)) {
                 if (_autoLayout) {
                     cast((_slider), UIForm).doLayout();
@@ -354,7 +362,8 @@ public static inline var STARTED : String = "scrollStarted";
 
 
 	private function sliderAttributes(attributes : Attributes) : Attributes{
-        _width = attributes.width;_height = attributes.height;
+        _width = attributes.width;
+		_height = attributes.height;
         var newAttributes : Attributes = attributes.copy();
         var padding : Float = ((_border == "true" || (_border != "false" && _xml.name.indexOf("scroll") >= 0))) ? PADDING : 0;
         if (_xml.has.width) {
@@ -393,7 +402,7 @@ public static inline var STARTED : String = "scrollStarted";
     }
 		
 		
-		private function mouseDown(event : MouseEvent) : Void{
+		private function mouseDown(event : MouseEvent) : Void{trace("mouseDown");
             if (_pressButton != null || mouseX > _attributes.width || _slider.mouseY > _slider.getBounds(_slider).bottom) {
                 return;
             }
@@ -427,7 +436,7 @@ public static inline var STARTED : String = "scrollStarted";
         }
 
 
-        public function stopScrolling() : Void{
+        public function stopScrolling() : Void{trace("stopScrolling");
             handleFlick();
             stage.removeEventListener(MouseEvent.MOUSE_UP, mouseUp);
             _dragTimer.stop();
@@ -450,7 +459,7 @@ private function handleFlick() : Void{
     }
 
 
-private function mouseUp(event : MouseEvent) : Void{
+private function mouseUp(event : MouseEvent) : Void{trace("mouseUp");
     stopScrolling();
     if (!_noScroll) {
         startMovement();
@@ -463,10 +472,10 @@ private function mouseUp(event : MouseEvent) : Void{
     }
 
 
-private function mouseMove(event : TimerEvent) : Void{
+private function mouseMove(event : TimerEvent) : Void{trace("mouseMove");
     if (!_noScroll) {
         var delta : Float = -sliderY;
-        sliderY += ((outsideSlideRange) ? _dampen : 1.0) * (mouseY - _lastMouse.y);
+        sliderY += (outsideSlideRange ? _dampen : 1.0) * (mouseY - _lastMouse.y);
         delta += sliderY;
         if (Math.abs(delta) > DELTA_THRESHOLD) {
             if (delta * _delta > 0) {
@@ -481,7 +490,8 @@ private function mouseMove(event : TimerEvent) : Void{
                 _delta = 0;
             }
             _distance += Math.abs(mouseY - _lastMouse.y); // + Math.abs(mouseX - _startMouse.x);
-            _lastMouse.x = mouseX;_lastMouse.y = mouseY;
+            _lastMouse.x = mouseX;
+			_lastMouse.y = mouseY;
         }
         if (!_noScroll && _distance > ABORT_THRESHOLD) {
             showScrollBar();
@@ -492,6 +502,7 @@ private function mouseMove(event : TimerEvent) : Void{
         else if (_touchTimer.currentCount == TOUCH_DELAY && !_classic && Math.abs(_delta) <= DELTA_THRESHOLD) {
             pressButton();
         }
+													  trace("end mouseMove");
     }
 
 
@@ -529,15 +540,14 @@ private function startMovement0() : Bool{
 /**
  *  Animate scrolling movement
  */  
-private function movement(event : TimerEvent) : Void{
+private function movement(event : TimerEvent) : Void{trace("movement");
     if (_endSlider < FINISHED) {
-     //	_delta *= _decay;
         _delta *= deltaToDecay(_delta);
         sliderY = sliderY + _delta;
         if (_distance > THRESHOLD) {
             showScrollBar();
         }
-        if (Math.abs(_delta) < _deltaThreshold || sliderY > 0 || sliderY < -_maximumSlide) {
+        if (Math.abs(_actualDeltaY) < _deltaThreshold || sliderY > 0 || sliderY < -_maximumSlide) {
             if (!startMovement0()) {
                 stopMovement();
                 }
@@ -545,8 +555,9 @@ private function movement(event : TimerEvent) : Void{
         }
         else {
             _delta = (-_endSlider - sliderY) * BOUNCE;
-            sliderY = sliderY + _delta;showScrollBar();
-            if (Math.abs(_delta) < _deltaThreshold) {
+            sliderY = sliderY + _delta;
+			showScrollBar();
+            if (Math.abs(_actualDeltaY) < _deltaThreshold) {
                 sliderY = -_endSlider;
                 stopMovement();
             }
@@ -557,7 +568,7 @@ private function movement(event : TimerEvent) : Void{
 /**
  *  Stop scrolling movement
  */  
-		private function stopMovement() : Void{
+		private function stopMovement() : Void{trace("stopMovement");
             _moveTimer.stop();
             _delta = 0;
             hideScrollBar();
@@ -651,7 +662,8 @@ private function clickUp(event : TimerEvent) : Void{
     if (_pressButton != null && _distance < THRESHOLD) {
         _dragTimer.stop();
         _pressButton.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
-        _pressButton = null;stopMovement();
+        _pressButton = null;
+		stopMovement();
         }
     }
 
@@ -732,9 +744,9 @@ public function searchHit(container : Sprite = null) : DisplayObject{
 
 
 	private function set_sliderY(value : Float) : Float{
-      //	if (Math.abs(value - _sliderPosition) < MAXIMUM_DY) {
+		value = toPixelBoundaryDouble(this, 0, value).y;
+		_actualDeltaY = value - _sliderPosition;
         _sliderPosition = value;
-		_sliderPosition = toPixelBoundaryDouble(this, 0, _sliderPosition).y;
         if (_slider.visible) {
             _slider.y = _sliderPosition;
         }
@@ -748,7 +760,7 @@ public function searchHit(container : Sprite = null) : DisplayObject{
     }
 
 
-	private function set_sliderVisible(value : Bool) : Bool{
+private function set_sliderVisible(value : Bool) : Bool{trace("sliderVisible");
 		if (value) {
 			addListeners();
 			hideScrollBar();
